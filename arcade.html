@@ -21,32 +21,22 @@
         .logo {
             text-align: left;
         }
-        .nav {
+        .nav-left, .nav-right {
             text-align: right;
         }
-        .nav ul {
+        .nav-left ul, .nav-right ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
-        .nav li {
+        .nav-left li, .nav-right li {
             display: inline-block;
-            margin-left: 20px;
+            margin-left: 30px; /* Increased margin for more space */
         }
-        .nav a {
+        .nav-left a, .nav-right a {
             text-decoration: none;
             color: #fff;
             font-weight: bold;
-        }
-        .video-container {
-            width: 100%;
-            height: auto; /* Adjust height automatically */
-            max-width: 300px; /* Set a maximum width */
-            margin-left: auto; /* Align to the right */
-        }
-        .video-container iframe {
-            width: 100%; /* Full width */
-            height: 169px; /* Height for a 16:9 aspect ratio */
         }
         .hero {
             background: url('https://example.com/arcade-bg.jpg') no-repeat center center;
@@ -70,7 +60,7 @@
             padding: 12px 20px;
             border-radius: 4px;
             text-decoration: none;
-            margin-right: 10px; /* Spacing between buttons */
+            margin-right: 10px;
         }
         .stats {
             background-color: #333;
@@ -106,15 +96,16 @@
             width: 200px;
             margin: 10px;
             padding: 20px;
-            border: 1px solid #666;
+            border: 2px solid yellow; /* Set the border color */
             border-radius: 4px;
             text-align: center;
             background-color: #555;
+            color: white; /* Default text color */
+            transition: all 0.3s; /* Smooth transition */
         }
-        .services-item i {
-            font-size: 50px;
-            margin-bottom: 10px;
-            color: #f39c12;
+        .services-item:hover {
+            border-color: yellowgreen; /* Change border color on hover */
+            color: yellow; /* Change text color on hover */
         }
         .testimonials {
             background-color: #333;
@@ -161,13 +152,18 @@
 
         /* Modal Styles */
         .modal-content {
-            background-color: black; /* Black background for the modal */
-            color: yellow; /* Yellow text */
-            border: 2px solid transparent; /* Default border */
+            background-color: black;
+            color: yellow;
+            border: 2px solid transparent;
         }
 
         .modal-content:hover {
-            border-color: yellowgreen; /* Change border color on hover */
+            border-color: yellowgreen;
+        }
+
+        .video-container {
+            width: 320px;
+            height: 180px;
         }
     </style>
 </head>
@@ -177,17 +173,21 @@
             <div class="logo">
                 <h1>Arcade Haven</h1>
             </div>
-            <nav class="nav">
+            <div class="nav-left">
                 <ul>
                     <li><a href="#">Games</a></li>
-                    <li><a href="#">Tournaments</a></li> 
+                    <li><a href="#">Tournaments</a></li>
+                </ul>
+            </div>
+            <div class="nav-right d-flex align-items-center">
+                <ul>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a></li>
-                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign Up</a></li>
                 </ul>
-            </nav>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/your_video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="video-container ms-3">
+                    <iframe id="video" width="320" height="180" src="https://www.youtube.com/embed/s6rEobiPNWs?enablejsapi=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </header>
@@ -196,8 +196,10 @@
             <div class="hero-content">
                 <h1>Level Up Your Game</h1>
                 <p>Join us for the ultimate gaming experience with classic and modern arcade games!</p>
-                <a href="#" class="btn">Join Now</a>
-                <button class="btn" data-bs-toggle="modal" data-bs-target="#videoModal">Play Video</button>
+                <div class="d-flex justify-content-center">
+                    <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">Join Now</a>
+                    <button id="playPauseButton" class="btn ms-2">Pause</button>
+                </div>
             </div>
         </div>
     </section>
@@ -238,14 +240,14 @@
                     <p>Compete for glory and prizes in our monthly tournaments.</p>
                 </div>
                 <div class="services-item">
-                    <i class="bi bi-joystick"></i>
-                    <h3>VR Experiences</h3>
-                    <p>Dive into immersive worlds with our VR gaming stations.</p>
+                    <i class="bi bi-person"></i>
+                    <h3>Multiplayer Fun</h3>
+                    <p>Join friends and challenge each other in exciting multiplayer games.</p>
                 </div>
                 <div class="services-item">
-                    <i class="bi bi-chat-dots"></i>
-                    <h3>Community Events</h3>
-                    <p>Join fellow gamers for community nights and events.</p>
+                    <i class="bi bi-stars"></i>
+                    <h3>New Arrivals</h3>
+                    <p>Check out the latest games added to our collection.</p>
                 </div>
             </div>
         </div>
@@ -253,13 +255,13 @@
     <section class="testimonials">
         <div class="container">
             <div class="testimonials-title">
-                <h2>What Gamers Say</h2>
+                <h2>What Our Players Say</h2>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonials-item">
                     <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/person-732310_960_720.png" alt="User 1">
                     <h3>User 1</h3>
-                    <p>"I love the variety of games available at Arcade Haven!"</p>
+                    <p>"Best arcade ever! The variety of games is amazing!"</p>
                 </div>
                 <div class="testimonials-item">
                     <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/person-732310_960_720.png" alt="User 2">
@@ -271,24 +273,8 @@
     </section>
     <section class="cta">
         <h2>Want to Join Us?</h2>
-        <a href="#" class="btn">Sign Up Now</a>
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#videoModal">Play Video</button>
+        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">Sign Up Now</a>
     </section>
-
-    <!-- Video Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">Arcade Haven - Welcome Video</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="https://www.youtube.com/embed/your_video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 400px;"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -329,7 +315,7 @@
                     <li><a href="#">Tournaments</a></li>          
                     <li><a href="#">About Us</a></li>
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a></li>
-                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign Up</a></li>
                 </ul>
                 <p class="copyright">&copy; 2023 Arcade Haven. All rights reserved.</p>
             </div>
@@ -354,12 +340,32 @@
             document.getElementById('visitorsCount').innerText = visitors;
             document.getElementById('tournamentsCount').innerText = tournaments;
 
-            // Repeat the update every second
             setTimeout(updateStats, 1000);
         }
 
         // Start updating stats on page load
         updateStats();
+
+        // Video play/pause functionality
+        const playPauseButton = document.getElementById('playPauseButton');
+        const video = document.getElementById('video');
+
+        playPauseButton.addEventListener('click', function() {
+            const player = new YT.Player(video, {
+                events: {
+                    'onReady': function(event) {
+                        if (playPauseButton.textContent === 'Pause') {
+                            event.target.pauseVideo();
+                            playPauseButton.textContent = 'Play';
+                        } else {
+                            event.target.playVideo();
+                            playPauseButton.textContent = 'Pause';
+                        }
+                    }
+                }
+            });
+        });
     </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
